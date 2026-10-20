@@ -25,7 +25,12 @@ A Next.js application designed for tuition and course checkout with **MongoDB** 
    - **Payment completed**: Saves `"completed"` status to MongoDB and displays a full receipt breakdown.
    - **Payment failed**: Displays an alert card with `"failed"` status saved to MongoDB, providing one-click options to **Retry Tikkie Payment** or edit details.
    - If the modal is dismissed via the close button, an on-page prompt asks the user to confirm whether the payment was completed or failed.
-5. **Live MongoDB Database Inspector**:
+5. **Admin Portal (`/admin`) with Password Authentication**:
+   - Secure admin authentication protected by `ADMIN_PASSWORD` (default: `admin123`).
+   - **Traffic & Analytics**: Live tracking of visitor pageviews, total visits, device distribution (Desktop, Mobile, Tablet), browser breakdowns, conversion rates, and total revenue (€).
+   - **Payment Records Monitoring**: Search and filter all payment transactions by status (`completed`, `failed`, `pending`) or reference/email.
+   - **Settings & Pricing Editor**: Real-time management of the default Tikkie payment URL, course plan tuition pricing, academy contact info, and maintenance mode toggle with instant persistence in MongoDB.
+6. **Live MongoDB Database Inspector**:
    - Built-in live inspector drawer to view and copy saved documents directly from the `payments` collection in both Table and JSON view modes, including live status badges (`completed`, `failed`, `pending`).
 
 ---
@@ -45,6 +50,9 @@ MONGODB_DB=alh_academy
 
 # Default Tikkie Payment Link
 NEXT_PUBLIC_DEFAULT_TIKKIE_URL=https://tikkie.me/pay/ALHAcademy/course-fee
+
+# Admin Password
+ADMIN_PASSWORD=admin123
 ```
 
 ### 3. Run Development Server
@@ -52,7 +60,7 @@ NEXT_PUBLIC_DEFAULT_TIKKIE_URL=https://tikkie.me/pay/ALHAcademy/course-fee
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) for the student checkout page or [http://localhost:3000/admin](http://localhost:3000/admin) for the admin portal.
 
 ---
 
@@ -60,4 +68,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 - **`POST /api/payments`**: Validates input, generates a unique reference, saves the payment document to MongoDB collection `payments`, and returns the Tikkie URL.
 - **`GET /api/payments`**: Fetches recent payment records stored in the `payments` collection.
+- **`PATCH /api/payments`**: Updates payment status (`completed`, `failed`).
+- **`POST /api/traffic`**: Records visitor pageviews and client device/browser info.
+- **`GET /api/settings`**: Public endpoint for active course prices, Tikkie URL, and academy settings.
+- **`POST /api/admin/auth`**: Authenticates admin password and issues session token.
+- **`GET /api/admin/traffic`**: Protected endpoint returning traffic metrics, visitor logs, and transaction lists.
+- **`GET /api/admin/settings`** & **`POST /api/admin/settings`**: Protected endpoints to read and update live academy settings.
 - **`GET /api/health`**: Tests MongoDB database connectivity and collection stats.
+
