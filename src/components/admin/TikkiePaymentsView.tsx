@@ -244,11 +244,7 @@ export default function TikkiePaymentsView({ token }: TikkiePaymentsViewProps) {
               <h2 className="text-xl font-black text-white tracking-tight">
                 Tikkie Payment Requests &amp; Transactions
               </h2>
-              {isMock && (
-                <span className="rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold px-2 py-0.5 border border-amber-500/30">
-                  Preview Sample Data
-                </span>
-              )}
+
             </div>
             <p className="text-xs text-slate-400 max-w-2xl">
               Inspect all completed Tikkie transactions for your active payment request directly from the
@@ -265,21 +261,6 @@ export default function TikkiePaymentsView({ token }: TikkiePaymentsViewProps) {
               <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} />
               Refresh Tikkie Data
             </button>
-
-            {credentialsStatus?.hasApiKey && credentialsStatus?.hasAppToken ? (
-              <button
-                onClick={handleToggleMock}
-                className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition cursor-pointer ${
-                  isMock
-                    ? "bg-purple-950/60 border-purple-800 text-purple-300 hover:bg-purple-900"
-                    : "bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700"
-                }`}
-                title="Toggle between live ABN AMRO API and Preview Sample Data"
-              >
-                <Sparkles className="h-3.5 w-3.5 text-purple-400" />
-                {isMock ? "Switch to Live API" : "Preview Sample Data"}
-              </button>
-            ) : null}
           </div>
         </div>
 
@@ -292,11 +273,10 @@ export default function TikkiePaymentsView({ token }: TikkiePaymentsViewProps) {
 
             {/* Api-Key Status */}
             <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-medium ${
-                credentialsStatus?.hasApiKey
-                  ? "bg-emerald-950/50 border-emerald-800/60 text-emerald-300"
-                  : "bg-amber-950/50 border-amber-800/60 text-amber-300"
-              }`}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-medium ${credentialsStatus?.hasApiKey
+                ? "bg-emerald-950/50 border-emerald-800/60 text-emerald-300"
+                : "bg-amber-950/50 border-amber-800/60 text-amber-300"
+                }`}
             >
               {credentialsStatus?.hasApiKey ? (
                 <CheckCircle2 className="h-3 w-3 text-emerald-400" />
@@ -311,11 +291,10 @@ export default function TikkiePaymentsView({ token }: TikkiePaymentsViewProps) {
 
             {/* X-App-Token Status */}
             <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-medium ${
-                credentialsStatus?.hasAppToken
-                  ? "bg-emerald-950/50 border-emerald-800/60 text-emerald-300"
-                  : "bg-amber-950/50 border-amber-800/60 text-amber-300"
-              }`}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-medium ${credentialsStatus?.hasAppToken
+                ? "bg-emerald-950/50 border-emerald-800/60 text-emerald-300"
+                : "bg-amber-950/50 border-amber-800/60 text-amber-300"
+                }`}
             >
               {credentialsStatus?.hasAppToken ? (
                 <CheckCircle2 className="h-3 w-3 text-emerald-400" />
@@ -330,11 +309,10 @@ export default function TikkiePaymentsView({ token }: TikkiePaymentsViewProps) {
 
             {/* PaymentRequestToken Status */}
             <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-medium ${
-                credentialsStatus?.hasPaymentRequestToken
-                  ? "bg-purple-950/50 border-purple-800/60 text-purple-300"
-                  : "bg-slate-900 border-slate-800 text-slate-400"
-              }`}
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-[11px] font-medium ${credentialsStatus?.hasPaymentRequestToken
+                ? "bg-purple-950/50 border-purple-800/60 text-purple-300"
+                : "bg-slate-900 border-slate-800 text-slate-400"
+                }`}
             >
               <CreditCard className="h-3 w-3 text-purple-400" />
               <span>PaymentRequestToken:</span>
@@ -378,7 +356,7 @@ export default function TikkiePaymentsView({ token }: TikkiePaymentsViewProps) {
               file. The system automatically reads these keys:
             </p>
             <pre className="p-3 rounded-lg bg-slate-900 font-mono text-[11px] text-slate-200 overflow-x-auto border border-slate-800">
-{`# ABN AMRO Tikkie API v2 Credentials
+              {`# ABN AMRO Tikkie API v2 Credentials
 Api-Key=your_abn_amro_api_key_here
 X-App-Token=your_tikkie_app_token_uuid_here
 PaymentRequestToken=your_payment_request_token_here`}
@@ -410,126 +388,7 @@ PaymentRequestToken=your_payment_request_token_here`}
         </div>
       )}
 
-      {/* 3. Token Search & Selection Toolbar */}
-      <div className="p-4 sm:p-5 rounded-2xl border border-slate-800 bg-slate-900/60 shadow-lg space-y-4">
-        <form
-          onSubmit={handleFetchCustomToken}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
-        >
-          <div className="flex-1 relative">
-            <span className="absolute left-3.5 top-3 text-slate-500 font-mono text-xs">Token:</span>
-            <input
-              type="text"
-              placeholder="e.g. fUKzY6Fc7DCaCYwSwfu38H (or your PaymentRequestToken)"
-              value={inputToken}
-              onChange={(e) => setInputToken(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-16 pr-4 py-2.5 text-xs text-white placeholder-slate-500 font-mono focus:outline-hidden focus:border-[#6C1D5F]"
-            />
-          </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              type="submit"
-              disabled={loading || !inputToken.trim()}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#6C1D5F] to-indigo-600 hover:from-purple-800 hover:to-indigo-500 disabled:opacity-50 text-white font-bold text-xs shadow-md shadow-purple-950/40 transition cursor-pointer flex items-center justify-center gap-1.5"
-            >
-              <Send className="h-3.5 w-3.5" />
-              Fetch Tikkies
-            </button>
-
-            {credentialsStatus?.defaultPaymentRequestToken && (
-              <button
-                type="button"
-                onClick={handleResetToEnv}
-                className="px-3 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold border border-slate-700 transition cursor-pointer"
-                title="Reset to default PaymentRequestToken from .env"
-              >
-                Reset to Env
-              </button>
-            )}
-          </div>
-        </form>
-
-        {/* Active Payment Request Metadata Card */}
-        {paymentRequest && (
-          <div className="pt-3 border-t border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
-            <div className="space-y-1">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-bold text-white text-sm">
-                  {paymentRequest.description || "Tikkie Payment Request"}
-                </span>
-                <span
-                  className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
-                    paymentRequest.status === "OPEN"
-                      ? "bg-emerald-950 text-emerald-300 border border-emerald-800"
-                      : "bg-slate-800 text-slate-400 border border-slate-700"
-                  }`}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${
-                      paymentRequest.status === "OPEN"
-                        ? "bg-emerald-400 animate-pulse"
-                        : "bg-slate-400"
-                    }`}
-                  />
-                  {paymentRequest.status}
-                </span>
-
-                <div className="flex items-center gap-1 font-mono text-[11px] text-purple-300 bg-purple-950/50 px-2 py-0.5 rounded border border-purple-800/40">
-                  <span>{paymentRequest.paymentRequestToken}</span>
-                  <button
-                    onClick={() =>
-                      handleCopy(paymentRequest.paymentRequestToken, "req_token")
-                    }
-                    className="hover:text-white transition cursor-pointer"
-                    title="Copy token"
-                  >
-                    {copiedToken === "req_token" ? (
-                      <Check className="h-3 w-3 text-emerald-400" />
-                    ) : (
-                      <Copy className="h-3 w-3" />
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 text-[11px] text-slate-400 flex-wrap">
-                {paymentRequest.createdDateTime && (
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3 text-slate-500" />
-                    Created: {new Date(paymentRequest.createdDateTime).toLocaleDateString()}
-                  </span>
-                )}
-                {paymentRequest.expiryDate && (
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3 text-slate-500" />
-                    Expires: {paymentRequest.expiryDate}
-                  </span>
-                )}
-                {paymentRequest.amountInCents != null ? (
-                  <span className="text-emerald-400 font-semibold">
-                    Fixed Amount: € {(paymentRequest.amountInCents / 100).toFixed(2)}
-                  </span>
-                ) : (
-                  <span className="text-indigo-400 font-semibold">Open Amount Request</span>
-                )}
-              </div>
-            </div>
-
-            {paymentRequest.url && (
-              <a
-                href={paymentRequest.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/40 font-semibold text-xs transition cursor-pointer shrink-0"
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                Open Tikkie Link
-              </a>
-            )}
-          </div>
-        )}
-      </div>
 
       {/* 4. Stat Summary Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -745,11 +604,10 @@ PaymentRequestToken=your_payment_request_token_here`}
                       {/* Status */}
                       <td className="py-3.5 px-4">
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
-                            hasRefund
-                              ? "bg-amber-950 text-amber-300 border border-amber-800"
-                              : "bg-emerald-950 text-emerald-300 border border-emerald-800"
-                          }`}
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${hasRefund
+                            ? "bg-amber-950 text-amber-300 border border-amber-800"
+                            : "bg-emerald-950 text-emerald-300 border border-emerald-800"
+                            }`}
                         >
                           {hasRefund ? "Refunded" : "Paid ✓"}
                         </span>
@@ -797,11 +655,10 @@ PaymentRequestToken=your_payment_request_token_here`}
                   <div className="flex items-center justify-between text-[11px] text-slate-400">
                     <span className="font-mono">{p.counterPartyAccountNumber || "IBAN: N/A"}</span>
                     <span
-                      className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold uppercase ${
-                        hasRefund
-                          ? "bg-amber-950 text-amber-300 border border-amber-800"
-                          : "bg-emerald-950 text-emerald-300 border border-emerald-800"
-                      }`}
+                      className={`inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold uppercase ${hasRefund
+                        ? "bg-amber-950 text-amber-300 border border-amber-800"
+                        : "bg-emerald-950 text-emerald-300 border border-emerald-800"
+                        }`}
                     >
                       {hasRefund ? "Refunded" : "Paid ✓"}
                     </span>

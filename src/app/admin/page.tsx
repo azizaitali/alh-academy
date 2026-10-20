@@ -411,11 +411,10 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center gap-2 border-t border-slate-800/80 pt-1">
           <button
             onClick={() => setActiveTab("overview")}
-            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer ${
-              activeTab === "overview"
-                ? "border-[#6C1D5F] text-purple-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
+            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer ${activeTab === "overview"
+              ? "border-[#6C1D5F] text-purple-400"
+              : "border-transparent text-slate-400 hover:text-slate-200"
+              }`}
           >
             <TrendingUp className="h-4 w-4" />
             Overview &amp; Analytics
@@ -423,11 +422,10 @@ export default function AdminPage() {
 
           <button
             onClick={() => setActiveTab("traffic")}
-            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer ${
-              activeTab === "traffic"
-                ? "border-[#6C1D5F] text-purple-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
+            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer ${activeTab === "traffic"
+              ? "border-[#6C1D5F] text-purple-400"
+              : "border-transparent text-slate-400 hover:text-slate-200"
+              }`}
           >
             <Users className="h-4 w-4" />
             Traffic &amp; Payments
@@ -438,11 +436,10 @@ export default function AdminPage() {
 
           <button
             onClick={() => setActiveTab("tikkie")}
-            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer whitespace-nowrap ${
-              activeTab === "tikkie"
-                ? "border-[#6C1D5F] text-purple-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
+            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer whitespace-nowrap ${activeTab === "tikkie"
+              ? "border-[#6C1D5F] text-purple-400"
+              : "border-transparent text-slate-400 hover:text-slate-200"
+              }`}
           >
             <CreditCard className="h-4 w-4" />
             Tikkie Payments
@@ -453,11 +450,10 @@ export default function AdminPage() {
 
           <button
             onClick={() => setActiveTab("settings")}
-            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer whitespace-nowrap ${
-              activeTab === "settings"
-                ? "border-[#6C1D5F] text-purple-400"
-                : "border-transparent text-slate-400 hover:text-slate-200"
-            }`}
+            className={`flex items-center gap-2 py-3 px-4 border-b-2 font-bold text-xs transition cursor-pointer whitespace-nowrap ${activeTab === "settings"
+              ? "border-[#6C1D5F] text-purple-400"
+              : "border-transparent text-slate-400 hover:text-slate-200"
+              }`}
           >
             <Settings className="h-4 w-4" />
             Settings &amp; Pricing
@@ -532,75 +528,7 @@ export default function AdminPage() {
             </div>
 
             {/* Middle Section: Device Distribution & Recent Activity */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Device Traffic Breakdown */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-4 shadow-lg">
-                <h3 className="font-bold text-white text-sm flex items-center gap-2">
-                  <Laptop className="h-4 w-4 text-purple-400" />
-                  Traffic by Device
-                </h3>
-
-                <div className="space-y-3 pt-1">
-                  <div>
-                    <div className="flex justify-between text-xs font-semibold mb-1">
-                      <span className="flex items-center gap-1.5 text-slate-300">
-                        <Laptop className="h-3.5 w-3.5 text-indigo-400" /> Desktop
-                      </span>
-                      <span className="text-slate-400">
-                        {deviceCounts.Desktop} ({((deviceCounts.Desktop / totalDeviceVisits) * 100).toFixed(0)}%)
-                      </span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                      <div
-                        className="h-full bg-indigo-500 rounded-full"
-                        style={{ width: `${(deviceCounts.Desktop / totalDeviceVisits) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between text-xs font-semibold mb-1">
-                      <span className="flex items-center gap-1.5 text-slate-300">
-                        <Smartphone className="h-3.5 w-3.5 text-emerald-400" /> Mobile
-                      </span>
-                      <span className="text-slate-400">
-                        {deviceCounts.Mobile} ({((deviceCounts.Mobile / totalDeviceVisits) * 100).toFixed(0)}%)
-                      </span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                      <div
-                        className="h-full bg-emerald-500 rounded-full"
-                        style={{ width: `${(deviceCounts.Mobile / totalDeviceVisits) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between text-xs font-semibold mb-1">
-                      <span className="flex items-center gap-1.5 text-slate-300">
-                        <Tablet className="h-3.5 w-3.5 text-amber-400" /> Tablet
-                      </span>
-                      <span className="text-slate-400">
-                        {deviceCounts.Tablet} ({((deviceCounts.Tablet / totalDeviceVisits) * 100).toFixed(0)}%)
-                      </span>
-                    </div>
-                    <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                      <div
-                        className="h-full bg-amber-500 rounded-full"
-                        style={{ width: `${(deviceCounts.Tablet / totalDeviceVisits) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-                  <span>Current Tikkie URL:</span>
-                  <span className="font-mono text-purple-400 truncate max-w-[180px]">
-                    {settings.defaultTikkieUrl}
-                  </span>
-                </div>
-              </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-1 gap-6">
               {/* Recent Payments Quick Overview */}
               <div className="lg:col-span-2 rounded-2xl border border-slate-800 bg-slate-900/60 p-5 space-y-4 shadow-lg">
                 <div className="flex items-center justify-between">
@@ -627,7 +555,7 @@ export default function AdminPage() {
                         <tr className="border-b border-slate-800 text-slate-400 uppercase font-semibold">
                           <th className="py-2.5 px-3">Reference</th>
                           <th className="py-2.5 px-3">Name</th>
-                          <th className="py-2.5 px-3">Amount</th>
+
                           <th className="py-2.5 px-3">Status</th>
                           <th className="py-2.5 px-3">Date</th>
                         </tr>
@@ -639,18 +567,15 @@ export default function AdminPage() {
                               {p.reference}
                             </td>
                             <td className="py-2.5 px-3 font-semibold text-white">{p.name}</td>
-                            <td className="py-2.5 px-3 font-bold text-slate-200">
-                              € {Number(p.amount).toFixed(2)}
-                            </td>
+
                             <td className="py-2.5 px-3">
                               <span
-                                className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
-                                  p.status === "completed"
-                                    ? "bg-emerald-950 text-emerald-300 border border-emerald-800"
-                                    : p.status === "failed"
+                                className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${p.status === "completed"
+                                  ? "bg-emerald-950 text-emerald-300 border border-emerald-800"
+                                  : p.status === "failed"
                                     ? "bg-rose-950 text-rose-300 border border-rose-800"
                                     : "bg-amber-950 text-amber-300 border border-amber-800"
-                                }`}
+                                  }`}
                               >
                                 {p.status}
                               </span>
@@ -691,11 +616,10 @@ export default function AdminPage() {
                   <button
                     key={filter}
                     onClick={() => setStatusFilter(filter)}
-                    className={`px-3 py-1.5 rounded-lg font-semibold capitalize transition cursor-pointer ${
-                      statusFilter === filter
-                        ? "bg-[#6C1D5F] text-white"
-                        : "bg-slate-800 text-slate-400 hover:text-white"
-                    }`}
+                    className={`px-3 py-1.5 rounded-lg font-semibold capitalize transition cursor-pointer ${statusFilter === filter
+                      ? "bg-[#6C1D5F] text-white"
+                      : "bg-slate-800 text-slate-400 hover:text-white"
+                      }`}
                   >
                     {filter}
                   </button>
@@ -730,7 +654,7 @@ export default function AdminPage() {
                         <th className="py-3 px-4">Status</th>
                         <th className="py-3 px-4">Name</th>
                         <th className="py-3 px-4">Email</th>
-                        <th className="py-3 px-4">Amount</th>
+
                         <th className="py-3 px-4">Date &amp; Time</th>
                       </tr>
                     </thead>
@@ -749,22 +673,19 @@ export default function AdminPage() {
                             </td>
                             <td className="py-3 px-4">
                               <span
-                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${
-                                  p.status === "completed"
-                                    ? "bg-emerald-950 text-emerald-300 border border-emerald-800"
-                                    : p.status === "failed"
+                                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase ${p.status === "completed"
+                                  ? "bg-emerald-950 text-emerald-300 border border-emerald-800"
+                                  : p.status === "failed"
                                     ? "bg-rose-950 text-rose-300 border border-rose-800"
                                     : "bg-amber-950 text-amber-300 border border-amber-800"
-                                }`}
+                                  }`}
                               >
                                 {p.status}
                               </span>
                             </td>
                             <td className="py-3 px-4 text-white font-semibold">{p.name}</td>
                             <td className="py-3 px-4 font-mono text-slate-300">{p.email}</td>
-                            <td className="py-3 px-4 font-bold text-white">
-                              € {Number(p.amount).toFixed(2)}
-                            </td>
+
                             <td className="py-3 px-4 text-slate-400">
                               {new Date(p.createdAt).toLocaleString()}
                             </td>
@@ -907,67 +828,7 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* Course Plans & Pricing */}
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 space-y-4 shadow-lg">
-                <div className="flex items-center gap-2.5 border-b border-slate-800 pb-3">
-                  <DollarSign className="h-5 w-5 text-emerald-400" />
-                  <div>
-                    <h3 className="font-bold text-white text-base">Course Tuition &amp; Plan Pricing</h3>
-                    <p className="text-xs text-slate-400">
-                      Manage course titles, descriptions, and checkout amounts.
-                    </p>
-                  </div>
-                </div>
 
-                <div className="space-y-4">
-                  {settings.coursePlans.map((plan, index) => (
-                    <div
-                      key={plan.id}
-                      className="rounded-xl border border-slate-800 bg-slate-950 p-4 space-y-3"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold text-white text-xs">Plan #{index + 1}: {plan.title}</span>
-                        {plan.badge && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800">
-                            {plan.badge}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div className="sm:col-span-2 space-y-1">
-                          <label className="text-[11px] font-semibold text-slate-400">Course Title</label>
-                          <input
-                            type="text"
-                            value={plan.title}
-                            onChange={(e) => {
-                              const updated = [...settings.coursePlans];
-                              updated[index].title = e.target.value;
-                              setSettings({ ...settings, coursePlans: updated });
-                            }}
-                            className="w-full text-xs bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white"
-                          />
-                        </div>
-
-                        <div className="space-y-1">
-                          <label className="text-[11px] font-semibold text-slate-400">Amount (€)</label>
-                          <input
-                            type="number"
-                            step="0.01"
-                            value={plan.amount}
-                            onChange={(e) => {
-                              const updated = [...settings.coursePlans];
-                              updated[index].amount = parseFloat(e.target.value) || 0;
-                              setSettings({ ...settings, coursePlans: updated });
-                            }}
-                            className="w-full text-xs bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white font-mono"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
 
               {/* Academy & General Info */}
               <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 space-y-4 shadow-lg">
