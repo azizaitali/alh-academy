@@ -22,7 +22,7 @@ A Next.js application designed for tuition and course checkout with **MongoDB** 
    - Once saved to MongoDB, the official Tikkie modal opens with authentic Tikkie styling, amount, reference, and direct Tikkie portal integration (`tikkieUrl` iframe embed & open in new window button).
    - Features explicit action buttons: **Payment completed** and **Payment failed** as requested.
 4. **Thank You & Payment Failed Status Screens**:
-   - **Payment completed**: Triggers celebratory confetti animation, saves `"completed"` status to MongoDB, and displays a full receipt breakdown.
+   - **Payment completed**: Saves `"completed"` status to MongoDB and displays a full receipt breakdown.
    - **Payment failed**: Displays an alert card with `"failed"` status saved to MongoDB, providing one-click options to **Retry Tikkie Payment** or edit details.
    - If the modal is dismissed via the close button, an on-page prompt asks the user to confirm whether the payment was completed or failed.
 5. **Live MongoDB Database Inspector**:

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import confetti from "canvas-confetti";
+import React, { useState } from "react";
 import {
   CheckCircle2,
   Copy,
@@ -39,20 +38,6 @@ export const ThankYouCard: React.FC<ThankYouCardProps> = ({
   onOpenDbInspector,
 }) => {
   const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    // Launch celebratory confetti
-    try {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#00b2a9", "#4f46e5", "#10b981", "#f59e0b", "#06b6d4"],
-      });
-    } catch {
-      // Ignore if canvas is unavailable
-    }
-  }, []);
 
   const handleCopyRef = () => {
     navigator.clipboard.writeText(payment.reference);
